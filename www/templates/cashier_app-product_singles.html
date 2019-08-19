@@ -1,0 +1,46 @@
+	<ion-view view-title=" {{ product.name }}" hide-nav-bar="false" >
+		<!-- popover -->
+		<ion-nav-buttons side="right">
+			<button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
+		</ion-nav-buttons>
+		<!-- ./popover -->
+		<ion-nav-title> {{ product.name }}</ion-nav-title>
+		<!-- content -->
+		<ion-content delegate-handle="top"   id="page-product_singles" class="page-product_singles">
+		
+    
+<ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()"></ion-refresher>                      
+<div class="list">
+
+    <div class="item item-avatar">
+        <img alt="" class="ratio1x1" ng-src="{{product.featured.thumbnail}}" />
+        <h2 ng-bind-html="product.name | to_trusted">{{product.name}}</h2>
+        <p class="calm">{{ product.price | currency:"Rp.":2 }}</p>
+    </div>
+
+	<div class="item item-text-wrap noborder to_trusted">
+    	<div class="slideshow_container to_trusted" ng-if="product.image_slidebox" >
+			<ion-slides options="{slidesPerView:1}" slider="data.slider" class="slideshow">
+				<ion-slide-page class="slideshow-item" ng-repeat="slide_item in product.image_slidebox | strExplode:'|' track by $index" >
+					<div class="item-text-wrap" ng-bind-html="slide_item | to_trusted"></div>
+				</ion-slide-page>
+			</ion-slides>
+    	</div>
+	</div>
+    
+    <div class="item item-text-wrap noborder to_trusted" ng-bind-html="product.description | strHTML">
+    </div>
+        
+        
+   	<div ng-if="product.price" class="item tabs tabs-secondary tabs-icon-left">
+		<a class="tab-item" ng-href="#/cashier_app/product_cart"><i class="icon ion-android-cart"></i> Keranjang Belanja <span ng-show="item_in_virtual_table_product">( {{ item_in_virtual_table_product  }} )</span></a>
+		<a class="tab-item" ng-click="addToDbVirtual(product);"><i class="icon ion-android-add-circle"></i> Add To Cart</a>
+	</div>    
+        
+</div>
+
+            
+    
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>

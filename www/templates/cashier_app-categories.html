@@ -1,0 +1,59 @@
+	<ion-view view-title=" Kategori" hide-nav-bar="false" >
+		<!-- popover -->
+		<ion-nav-buttons side="right">
+			<button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
+		</ion-nav-buttons>
+		<!-- ./popover -->
+		<ion-nav-title> Kategori</ion-nav-title>
+		<!-- content -->
+		<ion-content delegate-handle="top"  scroll="true"   id="page-categories" class=" page-categories">
+		
+    
+<!-- code refresh -->
+<ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()"></ion-refresher>
+<!-- ./code refresh -->
+
+
+<!-- code search -->
+<ion-list class="list" >
+	<div class="item item-input">
+		<i class="icon ion-search placeholder-icon"></i>
+		<input type="search" ng-model="filter_categories" placeholder="Filter" aria-label="filter categories" />
+	</div>
+</ion-list>
+<!-- ./code search -->
+
+
+<!-- code listing -->
+<div class="list animate-none">
+	<div class="item-thumbnail-3 card" ng-repeat="item in categories | filter:filter_categories as results" ng-init="$last ? fireEvent() : null"><a class="item item-colorful item-thumbnail-left item-text-wrap"  href="#/cashier_app/products/{{item.id}}">
+		<img alt="" class="full-image" ng-src="{{item.image.src}}" />
+		<h3 class=""  ng-bind-html="item.name | to_trusted"></h3>
+			<p >
+			{{item.count}} items
+			</p>
+	       <i class="icon ion-android-more-horizontal pull-right"></i>
+	</a></div>
+</div>
+<!-- ./code listing -->
+
+
+<!-- code infinite scroll -->
+<ion-list class="list">
+	<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="onInfinite()" distance="5px" ng-if="hasMoreData">
+    </ion-infinite-scroll>
+</ion-list>
+<!-- ./code infinite scroll -->
+
+
+<!-- code search result not found -->
+<ion-list class="list">
+	<div class="item" ng-if="results.length == 0" >
+		<p>No results found...!</p>
+	</div>
+</ion-list>
+<!-- code search result not found -->    
+    
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>

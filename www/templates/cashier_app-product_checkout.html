@@ -1,0 +1,118 @@
+	<ion-view view-title=" Checkout" hide-nav-bar="false" >
+		<!-- popover -->
+		<ion-nav-buttons side="right">
+			<button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
+		</ion-nav-buttons>
+		<!-- ./popover -->
+		<ion-nav-title> Checkout</ion-nav-title>
+		<!-- content -->
+		<ion-content delegate-handle="top"   id="page-product_checkout" class="page-product_checkout">
+		
+<form ng-submit="submitCheckout(orders)" novalidate="" name="form_order">
+        
+             
+        <div class="item item-divider">
+            BILLING DETAILS
+        </div>
+        
+        <div class="list card">
+
+            <label class="item item-input item-floating-label">
+                <input type="email" autocomplete="off" class="form-control" name="email" placeholder="Email" ng-model="orders.billing.email" required="required" /> 
+                <label for="email" class="control-label assertive" ng-show="form_order.email.$invalid && orders.billing.email!=''">
+                  <i class="icon ion-alert"></i> Email can't be empty
+                </label>
+            </label>
+            
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="phone" placeholder="Phone" ng-model="orders.billing.phone" required="required" /> 
+                <label for="phone" class="control-label assertive" ng-show="form_order.phone.$invalid && orders.billing.phone!=''">
+                  <i class="icon ion-alert"></i> Phone can't be empty
+                </label>
+            </label>
+        
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="first_name" placeholder="First Name" ng-model="orders.shipping.first_name" required="required"/>        
+                <label class="control-label assertive" ng-show="form_order.first_name.$invalid && orders.shipping.first_name!=''">
+                    <i class="icon ion-alert"></i> First name can't be empty
+                </label>
+            </label>
+            
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="last_name" placeholder="Last Name" ng-model="orders.shipping.last_name" required="required"/>  
+                <label class="control-label assertive" ng-show="form_order.last_name.$invalid && orders.shipping.last_name!=''">
+                  <i class="icon ion-alert"></i> Last name can't be empty
+                </label>
+            </label>
+     
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="address_1" placeholder="Street Address" ng-model="orders.shipping.address_1" required="required"/>  
+                <label class="control-label assertive" ng-show="form_order.address_1.$invalid && orders.shipping.address_1!=''">
+                  <i class="icon ion-alert"></i>
+                  Street address can't be empty
+                </label>
+            </label> 
+             
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="address_2" placeholder="Street Address" ng-model="orders.shipping.address_2" required="required"/>  
+            </label> 
+
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="city" placeholder="Town/City" ng-model="orders.shipping.city" required="required"/>  
+                <label class="control-label assertive" ng-show="form_order.city.$invalid && orders.shipping.city!=''">
+                  <i class="icon ion-alert"></i>
+                  Town/city can't be empty
+                </label>
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="state" placeholder="State" ng-model="orders.shipping.state" required="required"/>  
+                <label class="control-label assertive" ng-show="form_order.state.$invalid && orders.shipping.state!=''">
+                  <i class="icon ion-alert"></i>
+                  State can't be empty
+                </label>
+            </label>
+                     
+            <label class="item item-input item-floating-label">
+                <input type="text" autocomplete="off" class="form-control" name="postcode" placeholder="Zip Code" ng-model="orders.shipping.postcode" required="required"/>  
+                <label for="postcode" class="control-label assertive" ng-show="form_order.postcode.$invalid && orders.shipping.postcode!=''">
+                  <i class="icon ion-alert"></i>
+                  Zipcode can't be empty
+                </label>
+            </label>
+            
+            <label class="item item-input item-select">
+               <div class="input-label">
+                  Country
+                </div>
+                <select ng-model="orders.shipping.country">
+                  <option ng-repeat="country in countries" ng-value="country.code">{{ country.name }}</option>
+                </select>
+            </label>                          
+        </div>      
+
+        <div class="item item-divider">
+           PAYMENT METHOD
+        </div>
+        
+        <div class="padding">
+            <ion-list class="">
+                <ion-radio ng-repeat="payment in payments" ng-model="orders.payment_method" ng-value="payment.value">
+                    <div><b>{{payment.label}}</b></div>
+                    <div class="item-text-wrap">{{payment.desc}}</div>
+                </ion-radio>
+            </ion-list>
+        </div>
+                 
+        <div class="item item-button noborder">
+            <button class="button button-assertive">Place Order</button>
+        </div>
+        
+</form>
+
+ 
+
+
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>

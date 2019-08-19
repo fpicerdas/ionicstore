@@ -1,0 +1,33 @@
+	<ion-view view-title=" Produk" hide-nav-bar="false" >
+		<!-- popover -->
+		<ion-nav-buttons side="right">
+			<button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
+		</ion-nav-buttons>
+		<!-- ./popover -->
+		<ion-nav-title> Produk</ion-nav-title>
+		<!-- content -->
+		<ion-content delegate-handle="top"  scroll="true"   id="page-products" class=" page-products">
+		
+<!-- code refresh -->
+<ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()"></ion-refresher>
+<!-- ./code refresh -->
+
+<!-- code listing -->
+<div class="list row" ng-repeat="rows in chunked_products" >
+	<div class="col card" ng-repeat="item in rows">
+		<a class="item item-image ink" ng-href="#/cashier_app/product_singles/{{item.id}}">
+			<img alt="" class="ratio1x1" ng-src="{{item.featured.thumbnail}}" />
+		</a>
+        
+        <div class="item item-text-wrap" >
+            <strong class="calm">{{ item.price | currency:"Rp.":2 }}</strong><br/>
+            <span ng-bind-html="item.name | to_trusted">{{product.name}}</span>
+        </div>
+	
+	</div>
+</div>
+<!-- ./code listing -->
+      
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>

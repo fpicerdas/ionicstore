@@ -1,0 +1,60 @@
+	<ion-view view-title=" Keranjang Belanja" hide-nav-bar="false" >
+		<!-- popover -->
+		<ion-nav-buttons side="right">
+			<button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)"></button>
+		</ion-nav-buttons>
+		<!-- ./popover -->
+		<ion-nav-title> Keranjang Belanja</ion-nav-title>
+		<!-- content -->
+		<ion-content delegate-handle="top"   id="page-product_cart" class="page-product_cart">
+		
+    
+<!-- shopping cart -->
+	<div ng-if="product_cart.length != 0">
+		<!-- items -->
+		<div class="list" ng-init="product_order={}" >
+			<div class="card" ng-repeat="item in product_cart" ng-init="product_order[$index]=item">
+				<div class="item item-thumbnail-left item-button-right noborder">
+					<img ng-src="{{ item.featured.thumbnail }}" />
+					<h2 class="" ng-bind-html="item.name | to_trusted"></h2>
+					<span>{{ item._sum | currency:"Rp.":2 }}</span>
+					<input type="number" min="1" ng-change="updateDbVirtual()" ng-model="product_order[$index]['_qty']" />
+					<button class="button button-small button-assertive button-outline" ng-click="removeDbVirtualProduct(item.id)"><i class="icon ion-trash-a"></i></button>
+				</div>
+			</div>
+		</div>
+		<!-- ./items -->
+
+		<!-- totals -->
+		<div class="list">
+			<div class="item text-right">
+				<h2>{{ product_cost | currency:"Rp.":2 }}</h2>
+				<p>Go to Checkout to Pay</p>
+			</div>
+		</div>
+		<!-- ./totals -->
+
+		<!-- buttons -->
+		<div class="list">
+			<div class="item tabs tabs-secondary tabs-icon-top tabs-background-assertive-900">
+				<a class="tab-item" ng-click="clearDbVirtualProduct();"><i class="icon ion-trash-a"></i> Clear</a>
+				<a class="tab-item" ng-href="#/cashier_app/product_checkout"><i class="icon ion-cash"></i> Checkout</a>
+			</div>
+		</div>
+		<!-- ./buttons -->
+	</div>
+<!-- ./shopping cart -->
+
+
+<!-- no items -->
+	<div class="product_cart padding text-center" ng-if="product_cart.length == 0">
+		<i class="icon ion-ios-cart-outline"></i>
+		<p>There are no items in your cart</p>
+	</div>
+<!-- ./no items -->
+    
+    
+    
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>
